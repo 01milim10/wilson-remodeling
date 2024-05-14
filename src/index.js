@@ -1,17 +1,43 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import "./index.css";
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
-);
+import App from "./App";
+import PaintingService from "./pages/PaintingService";
+import RemodelingService from "./pages/RemodelingService";
+import FlooringService from "./pages/FlooringService";
+import WashingService from "./pages/PowerWashingService";
+import ConstructionService from "./pages/Construction";
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+const root = ReactDOM.createRoot(document.getElementById("root"));
+document.getElementById("root").classList.add("font-Montserat");
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <App />,
+  },
+  {
+    path: "painting-service",
+    element: <PaintingService />,
+  },
+  {
+    path: "remodeling-service",
+    element: <RemodelingService />,
+  },
+  {
+    path: "flooring-service",
+    element: <FlooringService />,
+  },
+  {
+    path: "washing-service",
+    element: <WashingService />,
+  },
+  {
+    path: "construction-service",
+    element: <ConstructionService />,
+  },
+]);
+
+root.render(<RouterProvider router={router} />);

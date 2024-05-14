@@ -1,0 +1,4 @@
+1. Top navigation background
+3. Margins on the contact button texts(Center align?)
+4. Hamburger(Logo and Hamburger fixed on small screen)
+5. inside pages: dont include 3rd and 4th section from the bottom
