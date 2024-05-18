@@ -26,7 +26,7 @@ export default function SlideShow(props) {
               <p>BROOKLAND, ARKANSAS AREA'S REMODELING EXPERTS</p>
             </div>
             <div className="w-2/3 sm:w-2/6 mx-auto text-center mt-5">
-              <a href="tel:(870)897-9347" className="flex justify-center">
+              <a href="sms:(870)897-9347" className="flex justify-center">
                 <button className="bg-button-blue p-4 md:px-6 md:py-4 sm:h-14 text-white rounded-full xl:mt-5 flex items-center hover:opacity-85 ring-1 ring-white">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
