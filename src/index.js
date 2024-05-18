@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./index.css";
+import "../src/utilities/firebase";
 
 import App from "./App";
 import PaintingService from "./pages/PaintingService";
@@ -19,23 +20,23 @@ const router = createBrowserRouter([
     element: <App />,
   },
   {
-    path: "painting-service",
+    path: "/painting-service/",
     element: <PaintingService />,
   },
   {
-    path: "remodeling-service",
+    path: "/remodeling-service/",
     element: <RemodelingService />,
   },
   {
-    path: "flooring-service",
+    path: "/flooring-service/",
     element: <FlooringService />,
   },
   {
-    path: "washing-service",
+    path: "/washing-service/",
     element: <WashingService />,
   },
   {
-    path: "construction-service",
+    path: "/construction-service/",
     element: <ConstructionService />,
   },
 ]);

@@ -22,10 +22,10 @@ export default function SlideShow(props) {
                 className="h-[80px] md:h-[100px] xl:h-[200px]"
               />
             </div>
-            <div className="w-5/6 mx-auto text-center my-4 shadow-sm text-4xl lg:text-5xl xl:text-6xl">
+            <div className="w-5/6 mx-auto text-center my-4 text-4xl lg:text-5xl xl:text-6xl">
               <p>BROOKLAND, ARKANSAS AREA'S REMODELING EXPERTS</p>
             </div>
-            <div className="w-2/3 sm:w-2/6 mx-auto text-center shadow-sm mt-5">
+            <div className="w-2/3 sm:w-2/6 mx-auto text-center mt-5">
               <a href="tel:(870)897-9347" className="flex justify-center">
                 <button className="bg-button-blue p-4 md:px-6 md:py-4 sm:h-14 text-white rounded-full xl:mt-5 flex items-center hover:opacity-85 ring-1 ring-white">
                   <svg

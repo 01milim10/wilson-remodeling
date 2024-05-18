@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import addContact from "../utilities/storeContact";
 import kitchenRemodel from "../assets/kitchen-remodel-beautiful-kitchen-furniture-2022-11-12-11-25-17-utc-2048x1366.jpg";
 import service1 from "../assets/paint.png";
 import service2 from "../assets/remodeling.png";
@@ -7,30 +8,30 @@ import service4 from "../assets/washer-machine.png";
 import service5 from "../assets/helmet.png";
 
 export default function Body() {
-  const [firstName, setFirstName] = useState("John Doe");
-  const [emailAddress, setEmailAddress] = useState("john.doe@example.com");
-  const [phone, setPhone] = useState("8702224444");
-  const [message, setMessage] = useState("Enter your message...");
-  const [consent, setConsent] = useState(false);
+  const [formValues, setFormValues] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    message: "",
+    consent: false,
+  });
 
-  const submitForm = () => {
-    const data = {
-      "name-1": firstName,
-      "email-1": emailAddress,
-      "phone-1": phone,
-      "textarea-1": message,
-      "consent-1": consent ? "checked" : "",
-    };
-    if (consent) {
-      console.log(data);
-      // fetch("https://wilsonsremodelingllc.com/wp-admin/admin-ajax.php", {
-      //   method: "POST",
-      //   headers: {
-      //     "Content-Type": "application/json",
-      //   },
-      //   body: JSON.stringify(data),
-      // }).then((response) => console.log(response.json()));
-    }
+  const clearForm = () => {
+    console.log("inside clearform");
+    setFormValues({
+      name: "",
+      email: "",
+      phone: "",
+      message: "",
+      consent: false,
+    });
+  };
+
+  const submitForm = async () => {
+    console.log(formValues);
+    addContact(formValues).then((res) => {
+      clearForm();
+    });
   };
   return (
     <>
@@ -338,10 +339,14 @@ export default function Body() {
                       id="first-name"
                       autoComplete="given-name"
                       onChange={(event) => {
-                        setFirstName(event.target.value);
+                        setFormValues({
+                          ...formValues,
+                          name: event.target.value,
+                        });
                       }}
-                      placeholder={firstName}
+                      placeholder="John Doe"
                       className="block w-full border-0 py-1.5 text-gray-900 shadow-sm bg-[#ebebeb]"
+                      required
                     />
                   </div>
                 </div>
@@ -360,10 +365,14 @@ export default function Body() {
                         type="email"
                         autoComplete="email"
                         onChange={(event) => {
-                          setEmailAddress(event.target.value);
+                          setFormValues({
+                            ...formValues,
+                            email: event.target.value,
+                          });
                         }}
-                        placeholder={emailAddress}
+                        placeholder="john.doe@example.com"
                         className="block w-full bg-[#ebebeb] border-0 py-1.5"
+                        required
                       />
                     </div>
                   </div>
@@ -381,10 +390,14 @@ export default function Body() {
                         type="number"
                         autoComplete="phone"
                         onChange={(event) => {
-                          setPhone(event.target.value);
+                          setFormValues({
+                            ...formValues,
+                            phone: event.target.value,
+                          });
                         }}
-                        placeholder={phone}
+                        placeholder="8702224444"
                         className="block w-full bg-[#ebebeb] border-0 py-1.5 "
+                        required
                       />
                     </div>
                   </div>
@@ -404,9 +417,12 @@ export default function Body() {
                       className="block w-full bg-[#ebebeb] border-0 py-1.5"
                       defaultValue={""}
                       onChange={(event) => {
-                        setMessage(event.target.value);
+                        setFormValues({
+                          ...formValues,
+                          message: event.target.value,
+                        });
                       }}
-                      placeholder={message}
+                      placeholder="Your message goes here..."
                     />
                   </div>
                 </div>
@@ -422,11 +438,15 @@ export default function Body() {
                       type="checkbox"
                       name="consent"
                       id="consent"
-                      checked={consent}
+                      checked={formValues.consent}
                       onChange={(event) => {
-                        setConsent(event.target.checked);
+                        setFormValues({
+                          ...formValues,
+                          consent: event.target.checked,
+                        });
                       }}
                       className="block border-0 py-1.5 text-gray-900 shadow-sm bg-[#ebebeb] mr-3"
+                      required
                     />
                     <span>
                       Yes, I agree with the privacy policy and terms and
@@ -439,7 +459,14 @@ export default function Body() {
                 <button
                   type="submit"
                   onClick={() => submitForm()}
-                  className="mt-5 md:mt-16 p-2 bg-button-blue text-white"
+                  className="mt-5 md:mt-16 p-2 bg-button-blue text-white disabled:bg-gray"
+                  disabled={
+                    !formValues.consent ||
+                    formValues.firstName == "" ||
+                    formValues.emailAddress == "" ||
+                    formValues.phone == "" ||
+                    formValues.message == ""
+                  }
                 >
                   <span>Send Message </span>
                 </button>

@@ -1537,6 +1537,13 @@ select{
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  appearance: none;
+  margin: 0;
+}
+
 .hover\:scale-110:hover{
   --tw-scale-x: 1.1;
   --tw-scale-y: 1.1;
@@ -1570,6 +1577,16 @@ select{
 .focus\:ring-red-600:focus{
   --tw-ring-opacity: 1;
   --tw-ring-color: rgb(220 38 38 / var(--tw-ring-opacity));
+}
+
+.disabled\:bg-gray:disabled{
+  --tw-bg-opacity: 1;
+  background-color: rgb(208 227 245 / var(--tw-bg-opacity));
+}
+
+.disabled\:text-blue-400:disabled{
+  --tw-text-opacity: 1;
+  color: rgb(38 125 214 / var(--tw-text-opacity));
 }
 
 .group:hover .group-hover\:scale-105{
