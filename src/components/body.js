@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import addContact from "../utilities/storeContact";
 import kitchenRemodel from "../assets/kitchen-remodel-beautiful-kitchen-furniture-2022-11-12-11-25-17-utc-2048x1366.jpg";
 import service1 from "../assets/paint.png";
@@ -16,8 +16,9 @@ export default function Body() {
     consent: false,
   });
 
+  const formRef = useRef();
+
   const clearForm = () => {
-    console.log("inside clearform");
     setFormValues({
       name: "",
       email: "",
@@ -27,11 +28,11 @@ export default function Body() {
     });
   };
 
-  const submitForm = async () => {
-    console.log(formValues);
-    addContact(formValues).then((res) => {
-      clearForm();
-    });
+  const submitForm = (event) => {
+    event.preventDefault();
+    addContact(formValues);
+    clearForm();
+    formRef.current?.reset();
   };
   return (
     <>
@@ -324,7 +325,7 @@ export default function Body() {
           </div>
           <div className="grid grid-cols-12 gap-6 mx-auto p-3">
             <div id="form" className="col-span-12 lg:col-span-5 m-5">
-              <form>
+              <form onSubmit={submitForm} ref={formRef}>
                 <div className="pb-3">
                   <label
                     htmlFor="first-name"
@@ -395,7 +396,7 @@ export default function Body() {
                             phone: event.target.value,
                           });
                         }}
-                        placeholder="8702224444"
+                        placeholder="870-222-4444"
                         className="block w-full bg-[#ebebeb] border-0 py-1.5 "
                         required
                       />
@@ -454,23 +455,22 @@ export default function Body() {
                     </span>
                   </div>
                 </div>
+                <div>
+                  <button
+                    type="submit"
+                    className="mt-5 md:mt-16 p-2 bg-button-blue text-white disabled:bg-gray"
+                    disabled={
+                      !formValues.consent ||
+                      formValues.firstName == "" ||
+                      formValues.emailAddress == "" ||
+                      formValues.phone == "" ||
+                      formValues.message == ""
+                    }
+                  >
+                    <span>Send Message </span>
+                  </button>
+                </div>
               </form>
-              <div>
-                <button
-                  type="submit"
-                  onClick={() => submitForm()}
-                  className="mt-5 md:mt-16 p-2 bg-button-blue text-white disabled:bg-gray"
-                  disabled={
-                    !formValues.consent ||
-                    formValues.firstName == "" ||
-                    formValues.emailAddress == "" ||
-                    formValues.phone == "" ||
-                    formValues.message == ""
-                  }
-                >
-                  <span>Send Message </span>
-                </button>
-              </div>
             </div>
             <div
               id="googleMaps"
